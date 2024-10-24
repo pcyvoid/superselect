@@ -23,7 +23,7 @@ def login(usuario, senha):
         return {"erro": "Erro de conexão"}
    
     cursor = conexao.cursor()
-    cursor.execute("SELECT * FROM usuarios WHERE idUsuario = %s AND senhaUsuario = %s;", (usuario, senha))
+    cursor.execute("SELECT * FROM usuarios WHERE idUsuarios = %s AND senhaUsuarios = %s;", (usuario, senha))
     resultado = cursor.fetchall()
 
 
