@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Produtos</title>
+    </head>
+    <body>
+        <h1>Lista de Produtos</h1>
+        <table>
+        <thead>
+            <tr>
+                <th>Nome</th>
+                <th>Descrição</th>
+                <th>Categoria</th>
+                <th>Preço</th>
+                <th>Validade</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for produto in produtos %}
+            <tr>
+                <td>{{ produtos[produto]["nome"] }}</td>
+                <td>{{ produtos[produto]["descricao"] }}</td>
+                <td>{{ produtos[produto]["categoria"] }}</td>
+                <td>R$ {{ produtos[produto]["preco"] }}</td>
+                <td>{{ produtos[produto]["validade"] }}</td>
+        <td>
+            <form action="" method="GET">
+            <button type="submit">Ver Comentários</button>
+            </form>
+        </td>
+            </tr>
+            {% endfor %}    
+        </tbody>
+</table>
+
+
+</body>
+</html>
