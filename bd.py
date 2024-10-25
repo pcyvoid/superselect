@@ -1,5 +1,6 @@
 import mysql.connector
 from mysql.connector import errors
+from flask import request 
 
 
 def criarConexao():
@@ -23,7 +24,7 @@ def login(usuario, senha):
         return {"erro": "Erro de conexão"}
    
     cursor = conexao.cursor()
-    cursor.execute("SELECT * FROM usuarios WHERE idUsuarios = %s AND senhaUsuarios = %s;", (usuario, senha))
+    cursor.execute("SELECT * FROM usuarios WHERE idUsuario = %s AND senhaUsuario = %s;", (usuario, senha))
     resultado = cursor.fetchall()
 
 
@@ -63,11 +64,33 @@ def listarProdutos():
                 "descricao": resultado[i][2],
                 "categoria": resultado[i][3],
                 "preco": resultado[i][4],
-                "validade": resultado[i][4],
+                "validade": resultado[i][5],
             }
-
 
     print(produtos)
     cursor.close()
     conexao.close()
     return produtos
+
+
+def adicionarProduto(nome, descricao, categoria, preco, validade):
+        conexao = criarConexao()
+        if conexao is None:
+            return {"erro": "Erro de conexão"}
+
+        cursor = conexao.cursor()
+        try:
+            cursor.execute("""
+            INSERT INTO produtos (nome, descricao, categoria, preco, validade)
+            VALUES (%s, %s, %s, %s, %s, %s)
+            """, (nome, descricao, categoria, preco, validade))
+            conexao.commit()
+        except errors.Error as error:
+            print("Erro ao inserir produto: ", error)
+            conexao.rollback()
+            return {"erro": "Erro ao inserir produto"}
+        finally:
+            cursor.close()
+            conexao.close()
+        
+        return {"Produto adicionado com sucesso"}
