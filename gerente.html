@@ -1,32 +1,34 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <script src="https://cdn.tailwindcss.com"></script>
-        <title>Gerente</title>
-    </head>
-    <body class="text-black">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <title>Produtos</title>
+</head>
+
+<body class="text-black">
 
 
-        <div class="header">
-            <h1>Gestão de Produtos</h1>
-            <form action="" method="GET">
+    <div class="header">
+        <h1>Gestão de Produtos</h1>
+        <form action="/gerente/adicionar" method="GET">
             <button type="submit" class="add">Adicionar Novo Produto</button>
-            </form>
-        </div>
+        </form>
+    </div>
 
 
-        <table>
+    <table>
         <thead>
-        <tr>
-            <th>Nome</th>
-            <th>Descrição</th>
-            <th>Categoria</th>
-            <th>Preço</th>
-            <th>Validade</th>
+            <tr>
+                <th>Nome</th>
+                <th>Descrição</th>
+                <th>Categoria</th>
+                <th>Preço</th>
+                <th>Validade</th>
             </tr>
-            </thead>
+        </thead>
         <tbody>
             {% for produto in produtos %}
             <tr>
@@ -37,21 +39,21 @@
                 <td>{{ produtos[produto]["validade"] }}</td>
 
 
-        <td>
-        <div class="actions">
-            <form action="" method="GET">
-            <button type="submit">Ver Comentários</button>
-            </form>
+                <td>
+                    <div class="actions">
+                        <form action="" method="GET">
+                            <button type="submit">Ver Comentários</button>
+                        </form>
 
 
-            <form action="" method="POST">
-            <button type="submit" class="delete">Excluir Produto</button>
-            </form>
-        </div>
-        </td>
-        </tr>
+                        <form action="" method="POST">
+                            <button type="submit" class="delete">Excluir Produto</button>
+                        </form>
+                    </div>
+                </td>
+            </tr>
             {% endfor %}
         </tbody>
-        </table>
+    </table>
 </body>
 </html>
