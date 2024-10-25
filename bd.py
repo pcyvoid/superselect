@@ -80,10 +80,10 @@ def adicionarProduto(nome, descricao, categoria, preco, validade):
 
         cursor = conexao.cursor()
         try:
-            cursor.execute("""
-            INSERT INTO produtos (nome, descricao, categoria, preco, validade)
-            VALUES (%s, %s, %s, %s, %s, %s)
-            """, (nome, descricao, categoria, preco, validade))
+            cursor.execute(f"""
+            INSERT INTO produtos (nomeProduto, descricaoProduto, categoriaProduto, precoProduto, validadeProduto)
+            VALUES ("{nome}", "{descricao}", "{categoria}", "R$ {preco}", "{validade}")
+            """)
             conexao.commit()
         except errors.Error as error:
             print("Erro ao inserir produto: ", error)
@@ -93,4 +93,4 @@ def adicionarProduto(nome, descricao, categoria, preco, validade):
             cursor.close()
             conexao.close()
         
-        return {"Produto adicionado com sucesso"}
+        return {"sucesso": "Produto adicionado com sucesso"}
