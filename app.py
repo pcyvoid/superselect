@@ -1,6 +1,6 @@
 from flask import Flask, render_template, request, redirect, url_for, session
 import mysql.connector
-from bd import login, listarProdutos
+from bd import login, listarProdutos, adicionarProduto
 import bd
 
 
@@ -70,7 +70,27 @@ def gerente():
     return render_template('gerente.html', produtos=produtos)
 
 
+@app.route('/gerente/adicionar')
+def adicionarProduto():
+    return render_template('adicionar.html')
+    
+@app.route('/gerente/adicionar/final', methods=['POST'])
+def novoProduto():
+    nome = request.form['nome']
+    descricao = request.form['descricao']
+    categoria = request.form['categoria']
+    preco = request.form['preco']
+    validade = request.form['validade']
+    
+    bd.adicionarProduto(nome, descricao, categoria, preco, validade)
+
+    return redirect(url_for('gerente'))
+
+
 @app.route('/logout')
 def logout():
     session.clear()
     return redirect(url_for('index'))
+
+if __name__ == '__main__':
+    app.run(debug=True)
